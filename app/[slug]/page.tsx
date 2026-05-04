@@ -1,7 +1,8 @@
 import Hero from "../components/Hero";
 import CTA from "../components/CTA";
+import Pricing from "../components/Pricing";
 import { getAllLandingPages } from "../lib/api";
-import { Section } from "../types/sections";
+import { PageData, Section } from "../types/sections";
 
 // 1. Chỉnh sửa định nghĩa Type cho props
 type Props = {
@@ -14,8 +15,7 @@ export default async function Page({ params }: Props) {
 
   // 3. Gọi API với slug đã unwrap
   const pages = await getAllLandingPages();
-  const page = pages.find((p: any) => p.slug === slug);
-
+const page = pages.find((p: PageData) => p.slug === slug);
   if (!page) {
     return (
       <div className="p-10 text-center">
@@ -24,10 +24,7 @@ export default async function Page({ params }: Props) {
       </div>
     );
   }
-
-  // Strapi v4 thường bọc trong attributes, kiểm tra data trả về
-  const data = page.attributes ? page.attributes : page;
-  const sections = data.sections || [];
+    const sections = page.sections || [];
 
   return (
     <main>
@@ -36,7 +33,9 @@ export default async function Page({ params }: Props) {
           case "hero":
             return <Hero key={i} {...section.data} />;
           case "cta":
-            return <CTA key={i} {...section.data} />;
+                return <CTA key={i} {...section.data} />;
+          case "pricing": 
+                return <Pricing key={i} {...section.data} />;
           default:
             return <p key={i}>Unknown section type: {section.type}</p>;
         }

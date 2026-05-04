@@ -1,9 +1,9 @@
 import Link from "next/link";
-
+import { Section } from "../types/sections";
 type CourseCardProps = {
   title: string;
   slug: string;
-  sections: any[];
+  sections: Section[]; // Không dùng any[] nữa, dùng Section[] để biết rõ bên trong có gì
 };
 
 export default function CourseCard({ title, slug, sections }: CourseCardProps) {
