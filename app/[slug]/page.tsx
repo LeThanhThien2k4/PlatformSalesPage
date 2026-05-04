@@ -24,20 +24,30 @@ const page = pages.find((p: PageData) => p.slug === slug);
       </div>
     );
   }
-    const sections = page.sections || [];
 
+const rawData = page.sections;
+
+// Kiểm tra nếu dữ liệu JSON bị bọc trong object 'data' của Strapi
+const sections = Array.isArray(rawData) 
+  ? rawData 
+  : (rawData && typeof rawData === 'object' && Array.isArray(rawData.data) ? rawData.data : []);
+
+console.log("Dữ liệu sections sau khi xử lý:", sections);
   return (
     <main>
-      {sections.map((section: Section, i: number) => {
-        switch (section.type) {
+      
+      
+      {sections.map((section: any, i: number) => {
+        // Strapi Dynamic Zone dùng __component thay vì type
+        const type = section.__component.split(".")[1]; // Lấy chữ 'hero' từ 'sections.hero'
+
+        switch (type) {
           case "hero":
-            return <Hero key={i} {...section.data} />;
+            return <Hero key={i} {...section} />;
           case "cta":
-                return <CTA key={i} {...section.data} />;
-          case "pricing": 
-                return <Pricing key={i} {...section.data} />;
+            return <CTA key={i} {...section} />;
           default:
-            return <p key={i}>Unknown section type: {section.type}</p>;
+            return null;
         }
       })}
     </main>

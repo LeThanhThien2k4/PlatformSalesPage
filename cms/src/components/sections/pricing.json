@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_sections_pricings",
+  "info": {
+    "displayName": "Pricing"
+  },
+  "options": {},
+  "attributes": {
+    "planName": {
+      "type": "string"
+    },
+    "price": {
+      "type": "string"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "features": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

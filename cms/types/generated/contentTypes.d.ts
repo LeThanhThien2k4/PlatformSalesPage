@@ -451,7 +451,9 @@ export interface ApiLandingPageLandingPage extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
-    sections: Schema.Attribute.JSON;
+    sections: Schema.Attribute.DynamicZone<
+      ['sections.hero', 'sections.cta', 'sections.pricing']
+    >;
     slug: Schema.Attribute.UID<'title'>;
     title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;

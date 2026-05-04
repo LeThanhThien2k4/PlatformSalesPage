@@ -19,7 +19,12 @@
       "targetField": "title"
     },
     "sections": {
-      "type": "json"
+      "type": "dynamiczone",
+      "components": [
+        "sections.hero",
+        "sections.cta",
+        "sections.pricing"
+      ]
     }
   }
 }

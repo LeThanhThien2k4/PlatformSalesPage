@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_sections_ctas",
+  "info": {
+    "displayName": "CTA",
+    "icon": "briefcase"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}
