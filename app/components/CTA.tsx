@@ -1,6 +1,6 @@
 type CTAProps = {
   text: string;
-  link: string;
+  link?: string;
 };
 
 export default function CTA({ text, link }: CTAProps) {

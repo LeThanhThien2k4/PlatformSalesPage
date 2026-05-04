@@ -1,6 +1,6 @@
 type HeroProps = {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   image?: string;
 };
 

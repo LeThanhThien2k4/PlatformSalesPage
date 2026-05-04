@@ -2,7 +2,7 @@ export type HeroSection = {
   type: "hero";
   data: {
     title: string;
-    subtitle: string;
+    subtitle ?: string;
     image ?: string;
   };
 };
@@ -11,7 +11,7 @@ export type CTASection = {
   type: "cta";
   data: {
     text: string;
-    link: string;
+    link?: string;
   };
 };
 
