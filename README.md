@@ -1,37 +1,226 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Platform Sales Page (Next.js + Strapi)
 
-## Getting Started
+## 📌 Giới thiệu
 
-First, run the development server:
+Dự án xây dựng hệ thống **Landing Page động** cho việc bán khóa học và sản phẩm, sử dụng:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+* **Next.js** → render UI + SEO
+* **Strapi (Headless CMS)** → quản lý nội dung
+* **JSON-driven UI** → render giao diện từ dữ liệu
+
+Mục tiêu:
+
+* Tạo landing page nhanh (<24h)
+* Marketing có thể tự tạo nội dung
+* Dễ mở rộng (affiliate, dashboard, analytics)
+
+---
+
+## 🧠 Kiến trúc hệ thống
+
+```text
+Strapi (CMS)
+     ↓ API (REST)
+Next.js (Render Engine)
+     ↓
+UI (Landing Page)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ⚙️ Công nghệ sử dụng
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Frontend
 
-## Learn More
+* Next.js
+* React
+* TypeScript
+* TailwindCSS
 
-To learn more about Next.js, take a look at the following resources:
+### Backend / CMS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* Strapi (Headless CMS)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📂 Cấu trúc project
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+.
+├── app/                # Next.js App Router
+│   └── [slug]/         # Dynamic landing page
+│       └── page.tsx
+├── components/         # UI Components (Hero, CTA,...)
+├── types/              # TypeScript types (Section, PageData)
+├── lib/                # API fetch (Strapi)
+├── cms/                # Strapi project
+└── README.md
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# PlatformSalesPage
+---
+
+## 🔁 Cách hoạt động
+
+### 1. Strapi quản lý nội dung
+
+Ví dụ dữ liệu:
+
+```json
+{
+  "title": "Landing A",
+  "slug": "landing-a",
+  "sections": [
+    {
+      "type": "hero",
+      "data": {
+        "title": "Hello từ CMS"
+      }
+    },
+    {
+      "type": "cta",
+      "data": {
+        "text": "Buy now"
+      }
+    }
+  ]
+}
+```
+
+---
+
+### 2. Next.js fetch data
+
+```ts
+const page = await getLandingPage(slug);
+```
+
+---
+
+### 3. Render UI
+
+```tsx
+sections.map((section) => {
+  switch (section.type) {
+    case "hero":
+      return <Hero {...section.data} />;
+    case "cta":
+      return <CTA {...section.data} />;
+  }
+});
+```
+
+---
+
+## 🚀 Cài đặt & chạy project
+
+### 1. Clone project
+
+```bash
+git clone <repo-url>
+cd project
+```
+
+---
+
+### 2. Cài frontend
+
+```bash
+npm install
+npm run dev
+```
+
+👉 http://localhost:3000
+
+---
+
+### 3. Cài CMS (Strapi)
+
+```bash
+cd cms
+npm install
+npm run develop
+```
+
+👉 Admin: http://localhost:1337/admin
+
+---
+
+## 🔑 Tạo dữ liệu trong Strapi
+
+* Tạo Collection: `landing-pages`
+* Fields:
+
+  * title (text)
+  * slug (UID)
+  * sections (JSON)
+
+---
+
+## 🌐 API
+
+```bash
+GET /api/landing-pages?filters[slug][$eq]=landing-a
+```
+
+---
+
+## 🎯 Routing
+
+Next.js sử dụng dynamic route:
+
+```bash
+/app/[slug]/page.tsx
+```
+
+Ví dụ:
+
+```bash
+/landing-a
+```
+
+---
+
+## 🧩 Core Concept
+
+* Component = UI
+* Props = dữ liệu
+* JSON = nguồn dữ liệu
+
+---
+
+## 🔥 Tính năng hiện tại
+
+* Dynamic landing page theo slug
+* Render UI từ CMS
+* Component-based architecture
+* Type-safe với TypeScript
+
+---
+
+## 🚧 Roadmap
+
+* Affiliate tracking system
+* Dashboard báo cáo
+* Authentication (JWT)
+* Payment integration
+* ISR (Incremental Static Regeneration)
+
+---
+
+## ⚠️ Lưu ý
+
+* Field `sections` phải là **array**
+* Không nested JSON sai cấu trúc
+* Đảm bảo dữ liệu đã publish trong Strapi
+
+---
+
+## 👨‍💻 Author
+
+Le Thanh Thien
+
+---
+
+## 📄 License
+
+MIT
