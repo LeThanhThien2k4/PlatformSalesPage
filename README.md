@@ -135,11 +135,10 @@ Bạn có thể tạo chúng bằng một trong hai cách:
 bash
 openssl rand -base64 32
 ```
-## 📦 Dùng Node.js (nếu đã cài Node)
+📦 Dùng Node.js (nếu đã cài Node)
 
-bash
-node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
-Chạy lệnh này 4-5 lần để lấy các giá trị khác nhau, mỗi lần cho một biến.
+- node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+ -Chạy lệnh này 4-5 lần để lấy các giá trị khác nhau, mỗi lần cho một biến.
 
 Riêng APP_KEYS cần hai chuỗi, cách nhau bằng dấu phẩy, ví dụ:
 APP_KEYS=abc123,xyz789
